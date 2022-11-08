@@ -8,20 +8,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   //VERIFICAR SE ESTÁ VAZIO O POST NOME
   if (empty($_POST['nome'])) {
-    $erroNome = "Por favor, preencha um nome";
+    $erroNome = "Por favor, Informe seu nome completo";
   } else {
     //PEGAR O VALOR VINDO DO POST E LIMPAR
     $nome = limpaPost($_POST['nome']);
 
     //VERIFICAR SE TEM SOMENTE LETRAS
     if (!preg_match("/^[a-zA-Z-' ]*$/", $nome)) {
-      $erroNome = "Apenas aceitamos letras e espaços em branco!";
+      $erroNome = "Não informe caracteres especiais, somente letras e espaço";
     }
   }
 
   //VERIFICAR SE ESTÁ VAZIO O POST EMAIL
   if (empty($_POST['email'])) {
-    $erroEmail = "Por favor, informe um e-mail";
+    $erroEmail = "Por favor, informe seu e-mail";
   } else {
     $email = limpaPost($_POST['email']);
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   } else {
     $repete_senha = limpaPost($_POST['repete_senha']);
     if ($repete_senha !== $senha) {
-      $erroRepeteSenha = "A repetição da senha está diferente da senha!";
+      $erroRepeteSenha = "O confirme a senha está diferente da senha!";
     }
   }
 
@@ -86,17 +86,17 @@ function limpaPost($valor)
             <!-- EMAIL -->
             <label>E-mail </label>
             <input type="email" <?php if (!empty($erroEmail)) { echo "class='invalido'";} ?> <?php if (isset($_POST['email'])) {
-              echo "value='" . $_POST['email'] . "'";} ?> name="email" placeholder="email@provedor.com">
+              echo "value='" . $_POST['email'] . "'";} ?> name="email" placeholder="seuemail@mail.com">
             <span class="erro"><?php echo $erroEmail; ?></span>
             <!-- SENHA -->
             <label>Senha </label>
             <input type="password" <?php if (!empty($erroSenha)) { echo "class='invalido'";} ?> <?php if (isset($_POST['senha'])) {
               echo "value='" . $_POST['senha'] . "'";} ?> name="senha" placeholder="Digite uma senha">
             <span class="erro"><?php echo $erroSenha; ?></span>
-            <!-- REPETIR A SENHA -->
-            <label>Repetir Senha </label>
+            <!-- CONFIRME A A SENHA -->
+            <label>Confirme a Senha </label>
             <input type="password" <?php if (!empty($erroSenha)) { echo "class='invalido'";} ?> <?php if (isset($_POST['repete_senha'])) {
-              echo "value='" . $_POST['repete_senha'] . "'";} ?> name="repete_senha" placeholder="Repita a senha">
+              echo "value='" . $_POST['repete_senha'] . "'";} ?> name="repete_senha" placeholder="Confirme a senha">
             <span class="erro"><?php echo $erroRepeteSenha; ?></span>
             <button type="submit"> Enviar Formulário </button>
         </form>
